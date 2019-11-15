@@ -3,6 +3,7 @@ package com.zipcodewilmington.looplabs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -18,19 +19,21 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
 
-        return Arrays.stream(array).filter(
-                word -> Collections.frequency(Arrays.asList(array), word) < maxNumberOfDuplications)
-                .toArray(String[]::new);
+//        return Arrays.stream(array).filter(
+//                word -> Collections.frequency(Arrays.asList(array), word) < maxNumberOfDuplications)
+//                .toArray(String[]::new);
+        return Arrays.stream(array).filter(x -> getOccurence(x) < maxNumberOfDuplications).toArray(String[]::new);
     }
 
     @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        return Arrays.stream(array).filter(
-                word -> Collections.frequency(Arrays.asList(array), word) != exactNumberOfDuplications)
-                .toArray(String[]::new);
+//        return Arrays.stream(array).filter(
+//                word -> Collections.frequency(Arrays.asList(array), word) != exactNumberOfDuplications)
+//                .toArray(String[]::new);
+        return Arrays.stream(array).filter(x -> getOccurence(x) != exactNumberOfDuplications).toArray(String[]::new);
     }
 
-//    public int getOccurence(){
-//        return Arrays.stream(array).filter(i -> )
-//    }
+    public long getOccurence(String number){
+        return Arrays.stream(array).filter(i -> i.equals(number)).count();
+    }
 }
