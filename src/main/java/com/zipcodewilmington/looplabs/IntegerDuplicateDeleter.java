@@ -18,7 +18,8 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
     @Override
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
         return Arrays.stream(array).filter(
-                i -> Collections.frequency(Arrays.asList(array), i) < maxNumberOfDuplications).toArray(Integer[]::new);
+                i -> Collections.frequency(Arrays.asList(array), i) < maxNumberOfDuplications)
+                .toArray(Integer[]::new);
 
     }
 
